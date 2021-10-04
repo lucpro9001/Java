@@ -2,6 +2,7 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ButtonModel;
 import javax.swing.JTextField;
 
 /*
@@ -9,7 +10,6 @@ import javax.swing.JTextField;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Admin
@@ -24,9 +24,12 @@ public class BMI extends javax.swing.JFrame {
         phanTich.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (!validInput()) {
+                    return;
+                }
                 PhanTich();
             }
-            
+
         });
     }
 
@@ -40,6 +43,7 @@ public class BMI extends javax.swing.JFrame {
     private void initComponents() {
 
         groupAsian = new javax.swing.ButtonGroup();
+        group1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -47,11 +51,11 @@ public class BMI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         height = new javax.swing.JTextField();
         weight = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        nonAsian = new javax.swing.JRadioButton();
         phanTich = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         outPut = new javax.swing.JTextArea();
+        asian = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,17 +70,21 @@ public class BMI extends javax.swing.JFrame {
         jLabel4.setText("Vùng:");
         jLabel4.setToolTipText("");
 
-        groupAsian.add(jRadioButton1);
-        jRadioButton1.setText("Asian");
-
-        groupAsian.add(jRadioButton2);
-        jRadioButton2.setText("Non-Asian");
+        groupAsian.add(nonAsian);
+        nonAsian.setText("Non-Asian");
+        nonAsian.setActionCommand("NonAsian");
+        nonAsian.setName("nonAsian"); // NOI18N
 
         phanTich.setText("Phân tích");
 
         outPut.setColumns(20);
         outPut.setRows(5);
         jScrollPane1.setViewportView(outPut);
+
+        groupAsian.add(asian);
+        asian.setSelected(true);
+        asian.setText("Asian");
+        asian.setActionCommand("asian");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,10 +111,10 @@ public class BMI extends javax.swing.JFrame {
                                         .addComponent(weight, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
                                         .addComponent(height))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jRadioButton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRadioButton2)))))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                                        .addComponent(asian)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nonAsian)))))))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,8 +133,8 @@ public class BMI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(nonAsian)
+                    .addComponent(asian))
                 .addGap(30, 30, 30)
                 .addComponent(phanTich, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -134,15 +142,14 @@ public class BMI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        nonAsian.getAccessibleContext().setAccessibleName("NonAsian");
         phanTich.getAccessibleContext().setAccessibleName("phanTich");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,22 +198,57 @@ public class BMI extends javax.swing.JFrame {
 
         String w = weight.getText();
         String h = height.getText();
+        String isAsian = groupAsian.getSelection().getActionCommand();
         double weigthNeed = 0;
         double he = Double.parseDouble(h);
         double we = Double.parseDouble(w);
         double BMI = we / (he * 2);
         outPut.setText(String.valueOf(BMI));
-        if (BMI < 18.5) {
-            weigthNeed = 18.5 * 2 * he - we;
-            dangerMess("Loại: Gầy\nCần tăng thêm " + weigthNeed + " Kg nữa để được loại BÌNH THƯỜNG");
-        } else if (BMI < 25) {
-            succMess("Loại: Bình thường\nCố gắng duy trì thể trạng nhé :3");
-        } else if (BMI < 30) {
-            weigthNeed = we - 24.9 * 2 * he;
-            warnMess("Loại: Tăng cân\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại BÌNH THƯỜNG");
+        if (isAsian.equals("NonAsian")) {
+            if (BMI < 18.5) {
+                weigthNeed = 18.5 * 2 * he - we;
+                dangerMess("Loại: Underweight\nNgười: NonAsian\nCần tăng thêm " + weigthNeed + " Kg nữa để được loại Normal");
+            } else if (BMI < 24.9) {
+                succMess("Loại: Normal\nNgười: NonAsian\nCố gắng duy trì thể trạng nhé :3");
+            } else if (BMI < 29.9) {
+                weigthNeed = we - 24.9 * 2 * he;
+                warnMess("Loại: Overweight\nNgười: NonAsian\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại Normal");
+            } else {
+                if (BMI < 40) {
+                    weigthNeed = we - 24.9 * 2 * he;
+                    dangerMess("Loại: Obese type 1\nNgười: NonAsian\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại Normal");
+                } else if (BMI < 50) {
+                    weigthNeed = we - 24.9 * 2 * he;
+                    dangerMess("Loại: Obese type 2\nNgười: NonAsian\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại Normal");
+                } else {
+                    weigthNeed = we - 24.9 * 2 * he;
+                    dangerMess("Loại: Obese type 3\nNgười: NonAsian\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại Normal");
+                }
+            }
         } else {
-            weigthNeed = we - 24.9 * 2 * he;
-            dangerMess("Loại: Béo phì\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại BÌNH THƯỜNG");
+            if (BMI < 18.5) {
+                weigthNeed = 18.5 * 2 * he - we;
+                dangerMess("Loại: Underweight\nNgười: Asian\nCần tăng thêm " + weigthNeed + " Kg nữa để được loại Normal");
+            } else if (BMI < 22.9) {
+                succMess("Loại: Normal\nNgười: Asian\nCố gắng duy trì thể trạng nhé :3");
+            } else if (BMI < 24.9) {
+                weigthNeed = we - 22.9 * 2 * he;
+                warnMess("Loại: Overweight\nNgười: Asian\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại Normal");
+            } else if (BMI < 29.9) {
+                weigthNeed = we - 22.9 * 2 * he;
+                warnMess("Loại: Pre-Obese\nNgười: Asian\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại Normal");
+            } else {
+                if (BMI < 40) {
+                    weigthNeed = we - 22.9 * 2 * he;
+                    dangerMess("Loại: Obese type 1\nNgười: Asian\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại Normal");
+                } else if (BMI < 50) {
+                    weigthNeed = we - 22.9 * 2 * he;
+                    dangerMess("Loại: Obese type 2\nNgười: Asian\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại Normal");
+                } else {
+                    weigthNeed = we - 22.9 * 2 * he;
+                    dangerMess("Loại: Obese type 3\nNgười: Asian\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại Normal");
+                }
+            }
         }
     }
 
@@ -259,6 +301,8 @@ public class BMI extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton asian;
+    private javax.swing.ButtonGroup group1;
     private javax.swing.ButtonGroup groupAsian;
     private javax.swing.JTextField height;
     private javax.swing.JLabel jLabel1;
@@ -266,9 +310,8 @@ public class BMI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton nonAsian;
     private javax.swing.JTextArea outPut;
     private javax.swing.JButton phanTich;
     private javax.swing.JTextField weight;
