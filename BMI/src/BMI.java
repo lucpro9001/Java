@@ -1,3 +1,9 @@
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JTextField;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,6 +21,13 @@ public class BMI extends javax.swing.JFrame {
      */
     public BMI() {
         initComponents();
+        phanTich.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PhanTich();
+            }
+            
+        });
     }
 
     /**
@@ -32,13 +45,13 @@ public class BMI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        height = new javax.swing.JTextField();
+        weight = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        phanTich = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        outPut = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,11 +72,11 @@ public class BMI extends javax.swing.JFrame {
         groupAsian.add(jRadioButton2);
         jRadioButton2.setText("Non-Asian");
 
-        jButton1.setText("Phân tích");
+        phanTich.setText("Phân tích");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        outPut.setColumns(20);
+        outPut.setRows(5);
+        jScrollPane1.setViewportView(outPut);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,7 +87,7 @@ public class BMI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(161, 161, 161)
-                        .addComponent(jButton1))
+                        .addComponent(phanTich))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,13 +100,13 @@ public class BMI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                                        .addComponent(jTextField1))
+                                        .addComponent(weight, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                                        .addComponent(height))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jRadioButton1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jRadioButton2)))))))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,27 +118,31 @@ public class BMI extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(height, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3))
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(weight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2))
                 .addGap(30, 30, 30)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(phanTich, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
+        phanTich.getAccessibleContext().setAccessibleName("phanTich");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,9 +187,80 @@ public class BMI extends javax.swing.JFrame {
         });
     }
 
+    void PhanTich() {
+
+        String w = weight.getText();
+        String h = height.getText();
+        double weigthNeed = 0;
+        double he = Double.parseDouble(h);
+        double we = Double.parseDouble(w);
+        double BMI = we / (he * 2);
+        outPut.setText(String.valueOf(BMI));
+        if (BMI < 18.5) {
+            weigthNeed = 18.5 * 2 * he - we;
+            dangerMess("Loại: Gầy\nCần tăng thêm " + weigthNeed + " Kg nữa để được loại BÌNH THƯỜNG");
+        } else if (BMI < 25) {
+            succMess("Loại: Bình thường\nCố gắng duy trì thể trạng nhé :3");
+        } else if (BMI < 30) {
+            weigthNeed = we - 24.9 * 2 * he;
+            warnMess("Loại: Tăng cân\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại BÌNH THƯỜNG");
+        } else {
+            weigthNeed = we - 24.9 * 2 * he;
+            dangerMess("Loại: Béo phì\nCần giảm thêm " + weigthNeed + " Kg nữa để được loại BÌNH THƯỜNG");
+        }
+    }
+
+    boolean validInput() {
+        if (emtyField(weight)) {
+            return false;
+        }
+        if (emtyField(height)) {
+            return false;
+        }
+        try {
+            String w = weight.getText();
+            String h = height.getText();
+            double pw = Double.parseDouble(w);
+            double ph = Double.parseDouble(h);
+        } catch (NumberFormatException e) {
+            warnMess("Some fields is not a number!");
+            return false;
+        }
+        return true;
+    }
+
+    boolean emtyField(JTextField a) {
+        String w = a.getText();
+        if (w.isEmpty()) {
+            a.setCaretPosition(Integer.MAX_VALUE);
+            a.requestFocus();
+            warnMess("Some fields is emty");
+            return true;
+        } else {
+            outPut.setForeground(Color.BLACK);
+            return false;
+        }
+    }
+
+    void dangerMess(String a) {
+        outPut.setForeground(Color.red);
+        outPut.setText(a);
+    }
+
+    void warnMess(String a) {
+        outPut.setForeground(Color.orange);
+        outPut.setText(a);
+    }
+
+    void succMess(String a) {
+        outPut.setForeground(Color.GREEN);
+        outPut.setText(a);
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup groupAsian;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField height;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -181,8 +269,8 @@ public class BMI extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextArea outPut;
+    private javax.swing.JButton phanTich;
+    private javax.swing.JTextField weight;
     // End of variables declaration//GEN-END:variables
 }
