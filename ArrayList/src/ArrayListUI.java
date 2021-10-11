@@ -1,9 +1,16 @@
+
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Admin
@@ -26,21 +33,193 @@ public class ArrayListUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        input = new javax.swing.JTextField();
+        them = new javax.swing.JButton();
+        timKiem = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        outPutBtnList = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        outPutThemBtn = new javax.swing.JTextArea();
+        displayListBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        trangThai = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ArrayList_Demo1");
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Ten");
+
+        input.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputKeyPressed(evt);
+            }
+        });
+
+        them.setText("Them");
+        them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                themActionPerformed(evt);
+            }
+        });
+
+        timKiem.setText("Tim kiem");
+        timKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timKiemActionPerformed(evt);
+            }
+        });
+
+        outPutBtnList.setColumns(20);
+        outPutBtnList.setRows(5);
+        jScrollPane1.setViewportView(outPutBtnList);
+
+        outPutThemBtn.setColumns(20);
+        outPutThemBtn.setRows(5);
+        jScrollPane2.setViewportView(outPutThemBtn);
+
+        displayListBtn.setText("Hien thi danh sach");
+        displayListBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                displayListBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Hien thi khi nhan Them button");
+
+        trangThai.setText("Trang thai");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(displayListBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(45, 45, 45))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(trangThai)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(them)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(timKiem)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(them, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(trangThai)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(displayListBtn)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addGap(46, 46, 46))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private List<String> list = new ArrayList<>();
+
+    void warn(JLabel o, String a) {
+        o.setForeground(Color.red);
+        o.setText(a);
+    }
+
+    void succ(JLabel o, String a) {
+        o.setForeground(Color.green);
+        o.setText(a);
+    }
+    boolean isInputEmty(String text) {
+        if (text.isEmpty()) {
+            warn(trangThai, "Ten is emty!");
+            return true;
+        }
+        return false;
+    }
+    private void timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timKiemActionPerformed
+        // TODO add your handling code here:
+        String text = input.getText();
+        if (isInputEmty(text)) {
+            return;
+        }
+        int i = list.indexOf(text);
+        if(i != -1) JOptionPane.showMessageDialog(null, text + "'s available in ArrayList, at index: " + i);
+        else JOptionPane.showMessageDialog(null, text + " isn't available in ArrayList!");
+    }//GEN-LAST:event_timKiemActionPerformed
+    void addList() {
+        String text = input.getText();
+        if (isInputEmty(text)) {
+            return;
+        }
+        list.add(text);
+        succ(trangThai, "Them thanh cong!");
+        outPutThemBtn.append(text + "\n");
+        input.setText("");
+        input.setCaretPosition(0);
+        input.requestFocus();
+    }
+    private void themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themActionPerformed
+        // TODO add your handling code here:
+        addList();
+    }//GEN-LAST:event_themActionPerformed
+
+    private void displayListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayListBtnActionPerformed
+        // TODO add your handling code here:
+        outPutBtnList.setText(null);
+        for (String string : list) {
+            outPutBtnList.append(string + "\n");
+        }
+    }//GEN-LAST:event_displayListBtnActionPerformed
+
+    private void inputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+//            JOptionPane.showMessageDialog(null, "You've Submitted the name ");
+            addList();
+        }
+    }//GEN-LAST:event_inputKeyPressed
 
     /**
      * @param args the command line arguments
@@ -78,5 +257,17 @@ public class ArrayListUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton displayListBtn;
+    private javax.swing.JTextField input;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea outPutBtnList;
+    private javax.swing.JTextArea outPutThemBtn;
+    private javax.swing.JButton them;
+    private javax.swing.JButton timKiem;
+    private javax.swing.JLabel trangThai;
     // End of variables declaration//GEN-END:variables
 }
